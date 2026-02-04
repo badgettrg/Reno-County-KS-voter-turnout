@@ -1,4 +1,4 @@
-# Hutchinson, KS voter turnout
+# Hutchinson, KS voter turnout since data availability in 2002
 
 Datafiles and analytic code, derived from data of the [National Neighborhood Data Archive (NaNDA)](https://www.icpsr.umich.edu/sites/nanda/view/studies/38506) at the University of Michigan amnd R code are in the folders above.
 
@@ -13,3 +13,4 @@ Presidential Years :
 * Hutchinson Median Percentile:  30.2 %
 
 [Yearly summary spreadsheet](https://github.com/badgettrg/Hutchinson-KS-voter-turnout/blob/main/data/National_and_Hutch_voter_turnout_since_2004.csv)
+* In 8 of the 10 national votes since 2004, Hutchinson voter turnout was less than the national median.
