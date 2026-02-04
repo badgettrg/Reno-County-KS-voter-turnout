@@ -11,3 +11,5 @@ Presidential Years :
 * National Median Turnout:  0.6041 
 * Hutchinson Turnout:  0.5555 
 * Hutchinson Median Percentile:  30.2 %
+
+[Yearly summary](https://github.com/badgettrg/Hutchinson-KS-voter-turnout/blob/main/data/National_and_Hutch_voter_turnout_since_2004.csv)
