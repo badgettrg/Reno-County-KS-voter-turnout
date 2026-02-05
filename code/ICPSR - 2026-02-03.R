@@ -1,5 +1,5 @@
 
-# This file is available athttps://github.com/badgettrg/Hutchinson-KS-voter-turnout
+# This file is available at https://github.com/badgettrg/Reno_County,KS-voter-turnout
 # Author: bob.badgett@gmail.com
 # Permissions:
 #* Code GNU GPLv3 https://choosealicense.com/licenses/gpl-3.0/
@@ -51,14 +51,15 @@ df_list <- lapply(years, function(yr) {
   national_summary <- paste(names(s), s, sep = ": ", collapse = " | ")
   nat_median <- median(year_data$VOTER_TURNOUT_PCT, na.rm = TRUE)
   
-  # Hutchinson Specific (FIPS 20155)
-  hutch_row_val <- year_data$VOTER_TURNOUT_PCT[year_data$STCOFIPS10 == 20155]
+  # Reno County Specific (ANSI 20155)
+  # From https://www.census.gov/library/reference/code-lists/ansi.html#cou
+  Reno_row_val <- year_data$VOTER_TURNOUT_PCT[year_data$STCOFIPS10 == 20155]
   
-  if (length(hutch_row_val) > 0 && !is.na(hutch_row_val)) {
-    hutch_val <- hutch_row_val
-    h_percentile <- mean(year_data$VOTER_TURNOUT_PCT <= hutch_val, na.rm = TRUE) * 100
+  if (length(Reno_row_val) > 0 && !is.na(Reno_row_val)) {
+    Reno_val <- Reno_row_val
+    h_percentile <- mean(year_data$VOTER_TURNOUT_PCT <= Reno_val, na.rm = TRUE) * 100
   } else {
-    hutch_val <- NA
+    Reno_val <- NA
     h_percentile <- NA
   }
   
@@ -67,36 +68,36 @@ df_list <- lapply(years, function(yr) {
     Presidential_election = is_presidential,
     national_VOTER_TURNOUT_PCT_summary = national_summary,
     national_median_VOTER_TURNOUT_PCT = nat_median,
-    Hutch_VOTER_TURNOUT_PCT = hutch_val,
-    Hutch_VOTER_TURNOUT_percentile = h_percentile,
+    Reno_VOTER_TURNOUT_PCT = Reno_val,
+    Reno_VOTER_TURNOUT_percentile = h_percentile,
     stringsAsFactors = FALSE
   )
 })
 
-df_National_and_Hutch <- do.call(rbind, df_list)
+df_National_and_Reno <- do.call(rbind, df_list)
 
 # Convert the percentile string column back to numeric if it isn't already
-# (Ensure Hutch_VOTER_TURNOUT_percentile is numeric for calculation)
+# (Ensure Reno_VOTER_TURNOUT_percentile is numeric for calculation)
 
 # Calculate medians grouped by Presidential_election
 # 1. Aggregate the three key values by the Presidential_election indicator
 summary_by_type <- aggregate(
   cbind(
     national_median_VOTER_TURNOUT_PCT, 
-    Hutch_VOTER_TURNOUT_PCT, 
-    Hutch_VOTER_TURNOUT_percentile
+    Reno_VOTER_TURNOUT_PCT, 
+    Reno_VOTER_TURNOUT_percentile
   ) ~ Presidential_election, 
-  data = df_National_and_Hutch, 
+  data = df_National_and_Reno, 
   FUN = median, 
   na.rm = TRUE
 )
 
-# 2. Rename columns for clarity (placing Hutch Turnout in the second data column)
+# 2. Rename columns for clarity (placing Reno Turnout in the second data column)
 colnames(summary_by_type) <- c(
   "Is_Presidential", 
   "National_Median_Turnout", 
-  "Hutch_Voter_Turnout_Pct", 
-  "Hutch_Median_Percentile"
+  "Reno_Voter_Turnout_Pct", 
+  "Reno_Median_Percentile"
 )
 
 # 3. Display the results
@@ -117,13 +118,13 @@ for(i in 1:nrow(summary_by_type)) {
   cat("  National Median Turnout: ", 
       round(summary_by_type$National_Median_Turnout[i], 4), "\n")
   
-  # Display the Hutchinson specific Turnout
-  cat("  Hutchinson Turnout: ", 
-      round(summary_by_type$Hutch_Voter_Turnout_Pct[i], 4), "\n")
+  # Display the Reno County specific Turnout
+  cat("  Reno County Turnout: ", 
+      round(summary_by_type$Reno_Voter_Turnout_Pct[i], 4), "\n")
   
-  # Display the Hutchinson Median Percentile
-  cat("  Hutchinson Median Percentile: ", 
-      round(summary_by_type$Hutch_Median_Percentile[i], 1), "%\n\n")
+  # Display the Reno County Median Percentile
+  cat("  Reno County Median Percentile: ", 
+      round(summary_by_type$Reno_Median_Percentile[i], 1), "%\n\n")
 }
 
-
+write_csv(df_National_and_Reno, "National_and_Reno_voter_turnout_since_2004.csv")
