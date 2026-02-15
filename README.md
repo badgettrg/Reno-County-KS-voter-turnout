@@ -1,6 +1,6 @@
 # Reno County, KS voter turnout since data availability in 2002
 
-[Datafiles](url), derived from data of the [National Neighborhood Data Archive (NaNDA)](https://www.icpsr.umich.edu/sites/nanda/view/studies/38506) at the University of Michigan, and [analytic R code](https://github.com/badgettrg/Reno-County-KS-voter-turnout/tree/main/code) are in the folders above. The ANSI (formerly called FIPS) code for Reno County is 20155 per [census.gov](https://www.census.gov/library/reference/code-lists/ansi.html#cou)
+[Datafiles](url), derived from data of the [National Neighborhood Data Archive (NaNDA)](https://www.icpsr.umich.edu/sites/nanda/view/studies/38506) at the University of Michigan, and [analytic R code](https://github.com/badgettrg/Reno-County-KS-voter-turnout/tree/main/code) are in the [folders](https://github.com/badgettrg/Reno-County-KS-voter-turnout/tree/main) for this [GitHub](httpsL//GitHub.io) repository. The ANSI (formerly called FIPS) code for Reno County is 20155 per [census.gov](https://www.census.gov/library/reference/code-lists/ansi.html#cou)
 
 Non-Presidential Years :
 * National Median Turnout:  0.4311 
